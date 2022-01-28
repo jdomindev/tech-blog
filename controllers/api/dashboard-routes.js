@@ -1,32 +1,53 @@
 const router = require('express').Router();
 const { User, Blog } = require('../../models');
+const withAuth = require('../../utils/auth');
 
+// api/dashboard/
+router.post('/', withAuth, async (req, res) => {
+  try {
+    const newBlog = await Blog.create({
+      ...req.body,
+      user_id: req.session.user_id,
+    });
 
-router.get('/dash', async (req, res) => {
-    try {
-        const blogData = await User.findOne({
-            where: {user_id: req.body.id},
-            include: { model: Blog}
-        });
-        const blogs = blogData.map(blog => blog.get({plain: true}))
-        return res.render('homepage', { blogs });
-    
-        } catch (err) {
-        console.log(err);
-        res.status(500).json(err); 
-        }
-  });
+    res.status(200).json(newBlog);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
-router.post('/', async (req, res) => {
-    try {
-      
-    
-        res.status(200).json(userData);
-      
-    } catch (err) {
-      res.status(400).json(err);
+// router.put('/', withAuth, async (req, res) => {
+//   try {
+//     const newBlog = await Blog.update({
+//       ...req.body,
+//       user_id: req.session.user_id,
+//     });
+
+//     res.status(200).json(newBlog);
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
+// });
+
+router.delete('/:id', withAuth, async (req, res) => {
+  try {
+    const blogData = await Blog.destroy({
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id,
+      },
+    });
+
+    if (!blogData) {
+      res.status(404).json({ message: 'No blog found with this id!' });
+      return;
     }
-  });
+
+    res.status(200).json(blogData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 module.exports = router;
