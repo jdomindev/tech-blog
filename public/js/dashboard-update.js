@@ -21,5 +21,5 @@ const updateButtonHandler = async (event) => {
   };
 
 document
-  .querySelector('.blog-update')
-  .addEventListener('click', updateButtonHandler);
+  .querySelector('.blog-form')
+  .addEventListener('submit', updateButtonHandler);

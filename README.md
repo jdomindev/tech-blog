@@ -1,6 +1,9 @@
 # Tech Blog
 ## Description
-- 
+- This project involved building out a tech blog site from scratch and deploying it to Heroku.
+- The tech blog is a place where users can create, update, and delete their own blog posts and comment on other user's posts.
+- This app had me following the Model-Views-Controller paradigm, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.
+- This app is my first introduction into building a full-stack website from scratch.
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)

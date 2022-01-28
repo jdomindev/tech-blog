@@ -33,7 +33,6 @@ router.get('/blog/:id', withAuth, async (req, res) => {
       return;
   }
     const blogs = blogData.get({plain: true});
-    console.log(blogs.comments);
     return res.render('oneBlog', { ...blogs,
        loggedIn: req.session.loggedIn  
       });
@@ -60,6 +59,27 @@ router.get('/dashboard', withAuth, async (req, res) => {
       console.log(err);
       res.status(500).json(err); 
       }
+});
+
+router.get('/dashboard/:id', withAuth, async (req, res) => {
+  try {
+    const blogData = await Blog.findByPk(req.params.id, {
+      include: [{ model: User, attributes: ['username']}, { model: Comment }]
+    });
+
+    if(!blogData) {
+      res.status(404).json({message: 'No blog post with this id!'});
+      return;
+  }
+    const blogs = blogData.get({plain: true});
+    return res.render('dashboardUpdate', { ...blogs,
+       loggedIn: req.session.loggedIn  
+      });
+
+  } catch (err) {
+  console.log(err);
+  res.status(500).json(err);
+  }
 });
 
 router.get('/login', (req, res) => {
