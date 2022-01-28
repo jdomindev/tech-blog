@@ -10,24 +10,39 @@ router.post('/', withAuth, async (req, res) => {
       user_id: req.session.user_id,
     });
 
+    if (!newBlog) {
+      res.status(404).json({ message: 'No blog post found with this id!' });
+      return;
+    }
+
     res.status(200).json(newBlog);
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-// router.put('/', withAuth, async (req, res) => {
-//   try {
-//     const newBlog = await Blog.update({
-//       ...req.body,
-//       user_id: req.session.user_id,
-//     });
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    const updatedBlog = await Blog.update({
+      ...req.body,
+      user_id: req.session.user_id,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    });
 
-//     res.status(200).json(newBlog);
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
+    if (!updatedBlog) {
+      res.status(404).json({ message: 'No blog post found with this id!' });
+      return;
+    }
+
+    res.status(200).json(updatedBlog);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
 router.delete('/:id', withAuth, async (req, res) => {
   try {
@@ -39,7 +54,7 @@ router.delete('/:id', withAuth, async (req, res) => {
     });
 
     if (!blogData) {
-      res.status(404).json({ message: 'No blog found with this id!' });
+      res.status(404).json({ message: 'No blog post found with this id!' });
       return;
     }
 

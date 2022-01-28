@@ -22,7 +22,6 @@ router.get('/', async (req, res) => {
 });
 
 // Get one blog post
-// add withAuth
 router.get('/blog/:id', withAuth, async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id, {
@@ -34,6 +33,7 @@ router.get('/blog/:id', withAuth, async (req, res) => {
       return;
   }
     const blogs = blogData.get({plain: true});
+    console.log(blogs.comments);
     return res.render('oneBlog', { ...blogs,
        loggedIn: req.session.loggedIn  
       });
@@ -62,25 +62,9 @@ router.get('/dashboard', withAuth, async (req, res) => {
       }
 });
 
-// // get comments
-// router.get('/comment', withAuth, async (req, res) => {
-//   try {
-//       const commentData = await Comment.findByPk(req.session.user_id, {
-//       });
-//       const comments = commentData.get({plain: true})
-//       return res.render('oneBlog', { ...comments, 
-//         loggedIn: req.session.loggedIn   
-//       });
-  
-//       } catch (err) {
-//       console.log(err);
-//       res.status(500).json(err); 
-//       }
-// });
-
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect('/');
+    res.redirect('/dashboard');
     return;
   }
 

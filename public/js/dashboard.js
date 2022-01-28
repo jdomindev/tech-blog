@@ -38,30 +38,12 @@ const blogFormHandler = async (event) => {
     }
   };
 
-//   const updateButtonHandler = async (event) => {
-//     if (event.target.hasAttribute('data-id')) {
-//       const id = event.target.getAttribute('data-id');
-  
-//       const response = await fetch(`/api/dashboard/${id}`, {
-//         method: 'PUT',
-//       });
-  
-//       if (response.ok) {
-//         document.location.replace('/dashboard');
-//       } else {
-//         alert('Failed to update project');
-//       }
-//     }
-//   };
 
   document
   .querySelector('.blog-form')
   .addEventListener('submit', blogFormHandler);
-
+  
   document
-  .querySelector('.blog-list')
+  .querySelector('.blog-delete')
   .addEventListener('click', delButtonHandler);
  
-//   document
-//   .querySelector('')
-//   .addEventListener('click', updateButtonHandler);
