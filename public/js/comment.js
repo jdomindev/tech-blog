@@ -1,19 +1,18 @@
 const commentFormHandler = async (event) => {
     event.preventDefault();
     // Collect values from the login form
-    const description = document.querySelector('#comment_description').innerHTML.trim();
+    const comment_description = document.querySelector('#comment-description').value.trim();
   
-    if (description) {
+    if (comment_description) {
       // Send a POST request to the API endpoint
-      const response = await fetch('/api/comment/:id', {
+      const response = await fetch('/api/comment/', {
         method: 'POST',
-        body: JSON.stringify({ description }),
+        body: JSON.stringify({ comment_description }),
         headers: { 'Content-Type': 'application/json' },
       });
   
       if (response.ok) {
         // If successful, redirect the browser to the oneBlog post page
-        console.log('response ok');
         document.location.replace('/blog/:id');
         
       } else {
