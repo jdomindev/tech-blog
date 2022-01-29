@@ -34,7 +34,6 @@ router.get('/blog/:id', withAuth, async (req, res) => {
       return;
   }
     const blogs = blogData.get({plain: true});
-    console.log(blogs);
     return res.render('oneBlog', { ...blogs,
        loggedIn: req.session.loggedIn  
       });
