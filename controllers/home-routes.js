@@ -25,7 +25,8 @@ router.get('/', async (req, res) => {
 router.get('/blog/:id', withAuth, async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id, {
-      include: [{ model: User, attributes: ['username']}, { model: Comment }]
+      include: [{ model: User, attributes: ['username']}, 
+      { model: Comment, include: { model: User, attributes: ['username'] } }]
     });
 
     if(!blogData) {
@@ -33,6 +34,7 @@ router.get('/blog/:id', withAuth, async (req, res) => {
       return;
   }
     const blogs = blogData.get({plain: true});
+    console.log(blogs);
     return res.render('oneBlog', { ...blogs,
        loggedIn: req.session.loggedIn  
       });
