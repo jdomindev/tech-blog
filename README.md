@@ -16,9 +16,10 @@
 ## Usage
 - Github Repo: https://github.com/jdomindev/tech-blog
 - Screenshots:
-    ![](./images/.png)
-- Video:
-    - [Demo-Video]()
+    ![Home](./images/tech-blog-home.png)
+    ![Login](./images/tech-blog-login.png)
+    ![Dashboard](./images/tech-blog-dashboard.png)
+    ![Post](./images/tech-blog-post.png)
 ## Credits
 - N/A
 ## License
