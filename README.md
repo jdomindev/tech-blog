@@ -15,6 +15,7 @@
 - N/A
 ## Usage
 - Github Repo: https://github.com/jdomindev/tech-blog
+- Deployed Link: https://secret-everglades-34739.herokuapp.com/
 - Screenshots:
     ![Home](./images/tech-blog-home.png)
     ![Login](./images/tech-blog-login.png)
