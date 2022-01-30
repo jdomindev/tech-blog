@@ -24,29 +24,29 @@ const commentFormHandler = async (event) => {
     }
   };
 
-  const delButtonHandler = async (event) => {
-    if (event.target.hasAttribute('data-id')) {
-      const id = event.target.getAttribute('data-id');
-      const id2 = window.location.toString().split('/')[
-        window.location.toString().split('/').length - 1
-      ];
+  // const delButtonHandler = async (event) => {
+  //   if (event.target.hasAttribute('data-id')) {
+  //     const id = event.target.getAttribute('data-id');
+  //     const id2 = window.location.toString().split('/')[
+  //       window.location.toString().split('/').length - 1
+  //     ];
   
-      const response = await fetch(`/api/comment/${id}`, {
-        method: 'DELETE',
-      });
+  //     const response = await fetch(`/api/comment/${id}`, {
+  //       method: 'DELETE',
+  //     });
   
-      if (response.ok) {
-        document.location.replace(`/blog/${id2}`);
-      } else {
-        alert('Failed to delete comment');
-      }
-    }
-  };
+  //     if (response.ok) {
+  //       document.location.replace(`/blog/${id2}`);
+  //     } else {
+  //       alert('Failed to delete comment');
+  //     }
+  //   }
+  // };
 
   document
     .querySelector('.comment')
     .addEventListener('submit', commentFormHandler);
 
-  document
-  .querySelector('.comment-entry')
-  .addEventListener('click', delButtonHandler);
+  // document
+  // .querySelector('.comment-entry')
+  // .addEventListener('click', delButtonHandler);
